@@ -19,11 +19,11 @@ import numpy as np
 from functools import reduce
 import freqtrade.vendor.qtpylib.indicators as qtpylib
 import talib.abstract as ta
-import random
 from freqtrade.strategy import CategoricalParameter, IStrategy
 
 from numpy.lib import math
 from pandas import DataFrame
+import secrets
 
 # ########################## SETTINGS ##############################
 # pairlist lenght(use exact count of pairs you used in whitelist size+1):
@@ -565,8 +565,7 @@ class DevilStra(IStrategy):
     spell_pot = [
         ",".join(
             tuple(
-                random.choices(
-                    list(SPELLS.keys()),
+                secrets.SystemRandom().choices(list(SPELLS.keys()),
                     # TODO: k will be change to len(pairlist)
                     k=PAIR_LIST_LENGHT
                 )
